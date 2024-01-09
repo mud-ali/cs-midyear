@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Navbar.module.css"
 
 export default function Navbar(props) {
     return (
@@ -13,8 +14,8 @@ export default function Navbar(props) {
             className="h-8"
             alt="Logo"
           /> */}
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Mud
+          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white title">
+            MudDebate!
           </span>
         </a>
         <button
