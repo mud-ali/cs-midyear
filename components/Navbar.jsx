@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Navbar.module.css"
+import styles from "@/styles/Navbar.module.css"
 
 export default function Navbar(props) {
     return (
@@ -14,7 +14,7 @@ export default function Navbar(props) {
             className="h-8"
             alt="Logo"
           /> */}
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white title">
+          <span className={styles.title + " self-center text-2xl font-semibold whitespace-nowrap dark:text-white"}>
             MudDebate!
           </span>
         </a>
