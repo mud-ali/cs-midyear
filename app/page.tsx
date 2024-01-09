@@ -1,10 +1,9 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from "next/image";
+import Link from "next/link";
+import Navbar from "../components/Navbar"
 
 export default function Home() {
   return (
-    <nav className = "bg-gray-800 p-4">
-      
-    </nav>
-  )
+    <Navbar/>
+  );
 }
