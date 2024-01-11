@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Navbar.module.css";
+import Link from "next/link";
 
 export default function Navbar(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,20 +8,17 @@ export default function Navbar(props) {
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
+    if (!isOpen) setisOpen2(false);
   };
   const toggleNavbar2 = () => {
     setisOpen2(!isOpen2);
+    if (!isOpen2) setIsOpen(false);
   };
 
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+    <nav className="bg-white border-b-4 border-green-400 dark:bg-gray-900 dark:border-gray-700">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
-          {/* <img
-            src="#"
-            className="h-8"
-            alt="Logo"
-          /> */}
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             MudDebate
           </span>
@@ -52,13 +50,13 @@ export default function Navbar(props) {
         <div className="hidden w-full md:block md:w-auto" id="navbar-dropdown">
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              <a
-                href="#"
+              <Link
+                href="/"
                 className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
                 aria-current="page"
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
               <button
@@ -77,44 +75,44 @@ export default function Navbar(props) {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m1 1 4 4 4-4"
                   />
                 </svg>
               </button>
               <div
                 id="dropdownNavbar"
-                className={`z-10 absolute ${isOpen ? "" : "hidden"} font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
+                className={`z-10 absolute ${!isOpen ? "hidden" : ""} font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
               >
                 <ul
                   className="py-2 text-sm text-gray-700 dark:text-gray-400"
                   aria-labelledby="dropdownLargeButton"
                 >
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      href="/dashboard"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Dashboard
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
+                    <Link
+                      href="/create"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Create Debate!
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       href="#"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Find a Debate!
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -145,27 +143,27 @@ export default function Navbar(props) {
               </button>
               <div
                 id="dropdownNavbar2"
-                className={`z-10 absolute ${isOpen2 ? "" : "hidden"} font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
+                className={`z-10 absolute ${!isOpen2 ? "hidden" : ""} font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
               >
                 <ul
                   className="py-2 text-sm text-gray-700 dark:text-gray-400"
                   aria-labelledby="dropdownLargeButton"
                 >
                   <li>
-                    <a
+                    <Link
                       href="#"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Create Topic!
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       href="#"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Search Topics!
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
