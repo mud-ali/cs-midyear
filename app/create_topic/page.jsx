@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import "../styles/Navbar.module.css";
+"use client";
 
-export default function CreateTopic(props) {
+import React, { useState } from "react";
+import Navbar from "../../components/Navbar"
+
+export default function create_topic(props) {
     return (
         <main>
+            <Navbar at="createtopic"/>
             <br></br>
             <form className="max-w-sm mx-auto">
                 <h1 className="text-4xl font-bold text-center mx-auto"> Create a Topic! </h1>
