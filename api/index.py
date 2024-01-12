@@ -13,7 +13,15 @@ create_tables(db)
 def submit_topic():
     if request.method == "POST":
         topic_name = request.form['topic_name']
-    insert_topic_details(db, topic_name)
+        topic_desc = request.form['topic_desc']
+        q1 = request.form['q1']
+        a1 = request.form['a1']
+        q2 = request.form['q2']
+        a2 = request.form['a2']
+        q3 = request.form['q3']
+        a3 = request.form['a3']
+
+    insert_topic_details(db, topic_name, topic_desc, q1, a1, q2, a2, q3, a3)
 
 
 @app.route("/store_opinion", methods = ["GET", "POST"])
