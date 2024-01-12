@@ -41,9 +41,9 @@ export default function Navbar(props : navprops) {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M1 1h15M1 7h15M1 13h15"
             />
           </svg>
@@ -64,7 +64,8 @@ export default function Navbar(props : navprops) {
                 id="dropdownNavbarLink"
                 onClick={toggleNavbar} 
                 data-dropdown-toggle="dropdownNavbar"
-                className={`flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent ${props.at.startsWith("debates") ? "text-blue-700 dark:text-blue-500" : ""}`}
+                className={`flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto md:dark:hover:text-blue-500 dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent ${props.at.startsWith('debate') ? 'text-blue-700 dark:text-blue-500' : 'dark:text-white'}`}
+                aria-current={props.at.startsWith("debate") ? "page" : "false"}
               >
                 Debates
                 <svg
@@ -123,7 +124,8 @@ export default function Navbar(props : navprops) {
                 id="dropdownNavbarLink2"
                 onClick={toggleNavbar2} 
                 data-dropdown-toggle="dropdownNavbar2"
-                className={`flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent ${props.at.startsWith("topic") ? "text-blue-700 dark:text-blue-500" : ""}`}
+                className={`flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto md:dark:hover:text-blue-500 dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent ${props.at.startsWith('topic') ? 'text-blue-700 dark:text-blue-500' : 'dark:text-white'}`}
+                aria-current={props.at.startsWith("topic") ? "page" : "false"}
               >
                 Topics
                 <svg
@@ -135,9 +137,9 @@ export default function Navbar(props : navprops) {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m1 1 4 4 4-4"
                   />
                 </svg>
