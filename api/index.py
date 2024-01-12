@@ -2,7 +2,8 @@ from flask import Flask, request
 import sqlite3
 import json
 
-from utils.executeQueries import create_tables, insert_topic_details
+from db_init import create_tables
+from db_insert import insert_topic_details
 
 app = Flask(__name__)
 

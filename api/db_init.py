@@ -1,5 +1,4 @@
 import sqlite3
-import json
 
 def create_tables(db):
     create_queries = [
@@ -41,13 +40,4 @@ def create_tables(db):
 
     for create_query in create_queries:
         db.execute(create_query)
-    db.commit()
-
-def insert_topic_details(db, topic_name, topic_desc, q1, a1, q2, a2, q3, a3):
-    db_cursor = db.cursor()
-    db_cursor.execute(
-        """ INSERT INTO topic 
-        (topic_name, topic_desc, q1, q1_options, q2, q2_options, q3, q3_options) VALUES (?, ?, ?, ?, ?, ?, ?, ?)""", 
-        (topic_name, topic_desc, q1, a1, q2, a2, q3, a3)
-    )
     db.commit()
