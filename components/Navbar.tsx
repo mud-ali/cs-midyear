@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../styles/Navbar.module.css";
 import Link from "next/link";
+import { navprops } from "@/types/navprops";
 
-export default function Navbar(props) {
+export default function Navbar(props : navprops) {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2,setisOpen2] = useState(false);
 
@@ -53,7 +54,7 @@ export default function Navbar(props) {
               <Link
                 href="/"
                 className={`block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:p-0 dark:bg-blue-600 md:dark:bg-transparent dark:hover:text-blue-500 ${props.at==="home" ? "text-blue-700 dark:text-blue-500" : ""}`}
-                aria-current={props.at==="home"?"page":""}
+                aria-current={props.at==="home"?"page":"false"}
               >
                 Home
               </Link>
@@ -63,7 +64,7 @@ export default function Navbar(props) {
                 id="dropdownNavbarLink"
                 onClick={toggleNavbar} 
                 data-dropdown-toggle="dropdownNavbar"
-                className="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                className={`flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent ${props.at.startsWith("debates") ? "text-blue-700 dark:text-blue-500" : ""}`}
               >
                 Debates
                 <svg
@@ -122,7 +123,7 @@ export default function Navbar(props) {
                 id="dropdownNavbarLink2"
                 onClick={toggleNavbar2} 
                 data-dropdown-toggle="dropdownNavbar2"
-                className="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                className={`flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent ${props.at.startsWith("topic") ? "text-blue-700 dark:text-blue-500" : ""}`}
               >
                 Topics
                 <svg
