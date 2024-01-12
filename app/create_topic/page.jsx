@@ -6,9 +6,9 @@ import Navbar from "../../components/Navbar"
 export default function create_topic(props) {
     return (
         <main>
-            <Navbar at="createtopic"/>
+            <Navbar at="topic-create"/>
             <br></br>
-            <form className="max-w-sm mx-auto">
+            <form className="max-w-sm mx-auto" action="/submit_topic" method="POST">
                 <h1 className="text-4xl font-bold text-center mx-auto"> Create a Topic! </h1>
                 <br></br>
                 <div>
