@@ -2,15 +2,14 @@
 
 import React from "react";
 import Navbar from "../../components/Navbar"
-import styles from "@/styles/createTopic.css"
 
 export default function create_topic(props) {
     return (
         <main>
             <Navbar at="topic-create"/>
             <br />
-            <form className={styles.topicaddform} action="/submit_topic" method="POST">
-                <h1 className=""> Create a Topic! </h1>
+            <form className={`m-auto w-1/2 leading-7 flex flex-col justify-around h-screen`} action="/submit_topic" method="POST">
+                <h1 className={`text-4xl`}> Create a Topic! </h1>
                 <div className="topq">
                     <label htmlFor="topic_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Topic Name:</label>
                     <input type="text" id="topic_name" placeholder="Enter topic name here!" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></input>
