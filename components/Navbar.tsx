@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/Navbar.module.css";
+import styles from "../styles/Navbar.module.css";
 import Link from "next/link";
 import { navprops } from "@/types/navprops";
 
@@ -102,18 +102,10 @@ export default function Navbar(props : navprops) {
                   </li>
                   <li>
                     <Link
-                      href="/create"
+                      href="/join"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
-                      Create Debate!
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Find a Debate!
+                      Join a Debate!
                     </Link>
                   </li>
                 </ul>
