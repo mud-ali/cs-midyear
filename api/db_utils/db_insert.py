@@ -8,3 +8,11 @@ def insert_topic_details(db, topic_name, topic_desc, q1, a1, q2, a2, q3, a3):
         (topic_name, topic_desc, q1, a1, q2, a2, q3, a3)
     )
     db.commit()
+
+def insert_opinion_details(db, topic_name, topic_desc, opinion1, opinion2, opinion3):
+    db_cursor = db.cursor()
+    # db_cursor.execute (
+    #     """
+    #     SELECT 
+    #     """
+    # )
