@@ -2,8 +2,8 @@ from flask import Flask, request, redirect, url_for
 import sqlite3
 import json
 
-from db_init import create_tables
-from db_insert import insert_topic_details
+from db_utils.db_init import create_tables
+from db_utils.db_insert import insert_topic_details
 
 app = Flask(__name__)
 
