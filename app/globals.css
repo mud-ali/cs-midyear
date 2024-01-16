@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:placeholder {
+  font-style: italic;
+  font-size: 16px;
+  color: mediumspringgreen;
+}
+
 :root {
   --foreground-rgb: 0, 12, 0;
   --background-hex: #faf0a2;
