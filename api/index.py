@@ -24,7 +24,7 @@ def submit_topic():
 
         insert_topic_details(db, topic_name, topic_desc, q1, a1, q2, a2, q3, a3)
 
-        return redirect(url_for('/'))
+        return redirect(url_for('/'), code=200)
 
 
 @app.route("/store_opinion", methods = ["GET", "POST"])
