@@ -37,7 +37,7 @@ export default function create_topic(props) {
                     <label htmlFor="a3" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Option choices:</label>
                     <input type="text" id="a3" placeholder="Enter the option choices!" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></input>
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit" class="bg-blue-500 rounded-full">Submit</button>
             </form>
         </main>
     );
