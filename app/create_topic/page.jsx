@@ -38,7 +38,7 @@ export default function create_topic(props) {
                 </div>
                 
                 
-                <button type="submit">Submit</button>
+                <button type="submit" class="bg-blue-500 rounded-full w-1/2 mx-auto">Submit</button>
             </form>
         </main>
     );
