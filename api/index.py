@@ -39,3 +39,7 @@ def match_debater():
 def create_debate():
     return
 
+@app.route("/signin", methods=["POST"])
+def sign_in():
+    # todo check stuff
+    return redirect(url_for("/"))
