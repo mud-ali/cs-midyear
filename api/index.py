@@ -31,15 +31,12 @@ def submit_topic():
 def store_opinion():
     return
 
-@app.route("/match_debater", methods = ["GET", "POST"])
-def match_debater():
-    return
-
-@app.route("/create_debate",methods = ["GET", "POST"])
-def create_debate():
-    return
-
 @app.route("/signin", methods=["POST"])
 def sign_in():
     # todo check stuff
     return redirect(url_for("/"))
+
+@app.route("/join", methods=["GET", "POST"])
+def join_debate():
+    # TODO  match people
+    return redirect(url_for("/debate"))
