@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, redirect, url_for
 import sqlite3
 import json
 
@@ -7,7 +7,7 @@ from db_insert import insert_topic_details
 
 app = Flask(__name__)
 
-db = sqlite3.connect('../db/debate.db')
+db = sqlite3.connect('db/debate.db')
 create_tables(db)
 
 @app.route("/submit_topic", methods=["GET","POST"])
@@ -22,7 +22,9 @@ def submit_topic():
         q3 = request.form['q3']
         a3 = request.form['a3']
 
-    insert_topic_details(db, topic_name, topic_desc, q1, a1, q2, a2, q3, a3)
+        insert_topic_details(db, topic_name, topic_desc, q1, a1, q2, a2, q3, a3)
+
+        return redirect(url_for('/'))
 
 
 @app.route("/store_opinion", methods = ["GET", "POST"])

@@ -1,9 +1,10 @@
 import sqlite3
 
 def create_tables(db):
+    # consider reading these from the files just for separation
     create_queries = [
-        """CREATE TABLE IF NOT EXISTS user(
-                user_id INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
+        """CREATE TABLE IF NOT EXISTS user (
+                user_id INTEGER PRIMARY KEY,
                 user_first_name VARCHAR,
                 user_last_name VARCHAR,
                 password VARCHAR,
@@ -15,7 +16,7 @@ def create_tables(db):
             )
         """, 
         """CREATE TABLE IF NOT EXISTS topic(
-                topic_id INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
+                topic_id INTEGER PRIMARY KEY,
                 topic_name VARCHAR, 
                 topic_desc TEXT,
                 q1 TEXT,
@@ -27,7 +28,7 @@ def create_tables(db):
             )
         """,
         """CREATE TABLE IF NOT EXISTS opinions(
-                user_id INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
+                user_id INTEGER PRIMARY KEY NOT NULL,
                 topic_id INTEGER NOT NULL,
                 opinion1 TEXT NOT NULL,
                 opinion2 TEXT NOT NULL,
