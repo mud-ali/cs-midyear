@@ -11,7 +11,7 @@ export default function join(props) {
       <Navbar at="topic-create" />
       <div className="message-box">
         <h2 className="{styles.debate-room-title}">Debate Room:</h2>
-       <Chatbox />
+        <Chatbox />
       </div>
     </main>
   );

@@ -1,3 +1,3 @@
 export type navprops = {
-    at:string
-}
+  at: string;
+};

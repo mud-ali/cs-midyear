@@ -1,12 +1,12 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 
-import Navbar from "@/components/Navbar"
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
     <main>
-      <Navbar at="home"/>
+      <Navbar at="home" />
     </main>
   );
 }
