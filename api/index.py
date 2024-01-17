@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for
+from flask import Flask, request, redirect, url_for, session
 import sqlite3
 import json
 
@@ -29,6 +29,13 @@ def submit_topic():
 
 @app.route("/store_opinion", methods = ["GET", "POST"])
 def store_opinion():
+    # make sure to add names of opinion form fields in jsx same as these or change them if not
+    if request.method == "POST":
+        # user = ?
+        topic_name = request.form['topic'] # for Search Topics Page, should be dropdown of topics for user to choose, maybe even use searchbar
+        opinion1 = request.form['opinion1']
+        opinion2 = request.form['opinion2']
+        opinion3 = request.form['opinion3']
     return
 
 @app.route("/signin", methods=["POST"])
