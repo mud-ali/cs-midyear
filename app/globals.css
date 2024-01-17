@@ -26,3 +26,35 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.chatbox {
+  width: 300px;
+  height: 100%;
+  border: 2px solid #ccc;
+  background-color: darkslategrey;
+}
+
+.chat-messages {
+  overflow-y: scroll;
+}
+
+.user-message {
+  background-color: green;
+  margin: 8px 0px;
+  border-radius: 4px;
+}
+
+.other-message {
+  background-color: red;
+  margin: 8px 0px;
+  border-radius: 4px;
+}
+
+.chat-inputs {
+  align-items: center;
+  padding: 10px;
+}
+
+.chat-inputs input {
+  margin-right: 10px;
+}
