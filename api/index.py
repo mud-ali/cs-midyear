@@ -43,7 +43,8 @@ def sign_in():
     # todo check stuff
     return redirect(url_for("/"))
 
-@app.route("/join", methods=["GET", "POST"])
+@app.route("/api/join", methods=["GET", "POST"])
 def join_debate():
     # TODO  match people
-    return redirect(url_for("/debate"))
+    print("hello")
+    return redirect("http://127.0.0.1:3000/debate/", code=302)

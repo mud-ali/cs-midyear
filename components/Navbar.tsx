@@ -18,7 +18,7 @@ export default function Navbar(props : navprops) {
   return (
     <nav className="bg-white border-b-4 border-green-400 dark:bg-gray-900 dark:border-gray-700">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             MudDebate
           </span>
@@ -101,7 +101,7 @@ export default function Navbar(props : navprops) {
                   </li>
                   <li>
                     <Link
-                      href="/join"
+                      href="/api/join"
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Join a Debate!
@@ -164,7 +164,7 @@ export default function Navbar(props : navprops) {
             </li>
             <li>
               <a
-                href="#"
+                href="/login/"
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
                 Login
