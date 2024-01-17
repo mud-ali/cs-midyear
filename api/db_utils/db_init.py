@@ -39,7 +39,7 @@ def create_tables(db):
             )
         """,
         """CREATE TABLE IF NOT EXISTS debate_private(
-            debate_id INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
+            debate_id INTEGER PRIMARY KEY,
             topic_id INTEGER NOT NULL,
             user_id1 INTEGER NOT NULL, 
             user_id2 INTEGER NOT NULL, 
