@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Chatbox = () => {
     const [chats, setChats] = useState([]);
