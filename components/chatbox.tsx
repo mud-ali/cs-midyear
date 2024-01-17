@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import {chat} from "@/types/chatTypes"
 
 const Chatbox = () => {
-    const [chats, setChats] = useState([]);
+    const [chats, setChats] = useState([] as chat[]);
     const [newChat, setNewChat] = useState('');
-    const maxChats = 12;
+    const maxChats = 15;
 
     const send = () => {
-        if(maxChats < chats.length){
-            chats.pop();
+        if (maxChats < chats.length){
+            chats.shift();
         }
 
         setChats([...chats, { text: newChat, sender: 'user' }]);
         setNewChat('');
     };
 
-    const handleKeyPress = (e) => {
+    const handleKeyPress = (e: { key: string; }) => {
         if (e.key === 'Enter') {
             send();
         }

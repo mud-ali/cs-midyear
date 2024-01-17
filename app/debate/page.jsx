@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Navbar from "../../components/Navbar";
-import Chatbox from "../../components/chatbox";
+import Navbar from "@/components/Navbar";
+import Chatbox from "@/components/chatbox";
 // import styles from "@/styles/join.module.css";
 
 export default function join(props) {
