@@ -1,5 +1,6 @@
 import sqlite3
 
+
 def create_tables(db):
     # consider reading these from the files just for separation
     create_queries = [
@@ -14,7 +15,7 @@ def create_tables(db):
                 region VARCHAR,
                 timezone VARCHAR
             )
-        """, 
+        """,
         """CREATE TABLE IF NOT EXISTS topic(
                 topic_id INTEGER PRIMARY KEY,
                 topic_name VARCHAR, 
@@ -35,6 +36,20 @@ def create_tables(db):
                 opinion3 TEXT NOT NULL, 
                 FOREIGN KEY(topic_id) REFERENCES topic(topic_id),
                 FOREIGN KEY(user_id) REFERENCES user(user_id)
+            )
+        """,
+        """CREATE TABLE IF NOT EXISTS debate_private(
+            debate_id INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
+            topic_id INTEGER NOT NULL,
+            user_id1 INTEGER NOT NULL, 
+            user_id2 INTEGER NOT NULL, 
+            score_1 INTEGER,
+            score_2 INTEGER,
+            debate_date DATE,
+            status INTEGER,
+            FOREIGN KEY(topic_id) REFERENCES topic(topic_id),
+            FOREIGN KEY(user_id1) REFERENCES opinions(user_id),
+            FOREIGN KEY(user_id2) REFERENCES user(user_id)
             )
         """
     ]
