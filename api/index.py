@@ -3,7 +3,7 @@ import sqlite3
 import json
 
 from db_utils.db_init import create_tables
-from db_utils.db_insert import insert_topic_details
+from insert_utils.db_insert import insert_topic_details, insert_opinion_details
 
 app = Flask(__name__)
 
@@ -31,12 +31,15 @@ def submit_topic():
 def store_opinion():
     # make sure to add names of opinion form fields in jsx same as these or change them if not
     if request.method == "POST":
-        # user = ?
+        user_id = "XXXXX" # how do we get this?
         topic_name = request.form['topic'] # for Search Topics Page, should be dropdown of topics for user to choose, maybe even use searchbar
         opinion1 = request.form['opinion1']
         opinion2 = request.form['opinion2']
         opinion3 = request.form['opinion3']
-    return
+
+        insert_opinion_details(db, user_id, topic_name, opinion1, opinion2, opinion3)
+    
+    return redirect(url_for('/'))
 
 @app.route("/signin", methods=["POST"])
 def sign_in():

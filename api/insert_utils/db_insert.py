@@ -1,0 +1,35 @@
+import sqlite3
+from datetime import datetime
+
+def insert_topic_details(db, topic_name, topic_desc, q1, a1, q2, a2, q3, a3):
+    db_cursor = db.cursor()
+    db_cursor.execute(
+        """ INSERT INTO topic 
+        (topic_name, topic_desc, q1, q1_options, q2, q2_options, q3, q3_options) VALUES (?, ?, ?, ?, ?, ?, ?, ?)""", 
+        (topic_name, topic_desc, q1, a1, q2, a2, q3, a3)
+    )
+    db.commit()
+
+def insert_opinion_details(db, user_id, topic_name, opinion1, opinion2, opinion3):
+    db_cursor = db.cursor()
+    db_cursor.execute(
+        '''SELECT topic_id FROM topic WHERE topic_name = ?''', 
+        (topic_name)
+    )
+    topic_id = db_cursor.fetchone()
+    db_cursor.execute(
+        """ INSERT INTO opinion 
+        (user_id, topic_id, opinion1, opinion2, opinion3) VALUES (?, ?, ?, ?, ?)""", 
+        (user_id, topic_id, opinion1, opinion2, opinion3)
+    )
+    db.commit()
+
+def create_debate(db, user_id1, user_id2, topic_id):
+    db_cursor = db.cursor()
+    db_cursor.execute(
+        """ INSERT INTO debate_private 
+        (topic_id, user_id1, user_id2, score_1, score_2, debate_date, status) VALUES (?, ?, ?, ?, ?, ?, ?)""", 
+        (topic_id, user_id1, user_id2, 0, 0, datetime.today().strftime("%Y-%m-%d"), 1)
+    )
+    db.commit()
+
