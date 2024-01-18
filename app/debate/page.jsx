@@ -5,10 +5,10 @@ import Navbar from "@/components/Navbar";
 import Chatbox from "@/components/chatbox";
 import styles from "@/styles/debateRoom.module.css";
 
-export default function join(props) {
+export default function join() {
   return (
     <main>
-      <Navbar at="topic-create" />
+      <Navbar at="debate-play" />
       <div className="message-box">
         <h2 className={styles.title}>Debate Room:</h2>
         <Chatbox />
