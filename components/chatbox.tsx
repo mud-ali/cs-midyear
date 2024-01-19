@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { chat } from "@/types/chatTypes";
+import ChatMessage from "./ChatMessage";
 
 const Chatbox = () => {
   const [chats, setChats] = useState([] as chat[]);
@@ -15,24 +16,23 @@ const Chatbox = () => {
     setNewChat("");
   };
 
-  const handleKeyPress = (e: { key: string }) => {
+  const handleKeyPress = (e: {key:string}) => {
     if (e.key === "Enter") {
       send();
     }
   };
 
   return (
-    <div className="chatbox">
+    <div className="chatbox h-screen w-full">
       <h2>Chatbox:</h2>
-      <div className="messages">
+      <div className="messages w-full">
         {chats.map((message, index) => (
-          <div
-            key={index}
-            className={
-              message.sender === "user" ? "user-message" : "other-message"
-            }
-          >
-            {message.text}
+          <div>
+            <ChatMessage
+              key={index}
+              name={message.sender}
+              message={message.text}
+            />
           </div>
         ))}
       </div>
