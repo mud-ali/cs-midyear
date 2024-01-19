@@ -4,10 +4,11 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 
 export default function login() {
-
-    const forgot = () => {
-      window.alert("too bad, we don't know your password either.\n\nmake a new account or something")
-    }
+  const forgot = () => {
+    window.alert(
+      "too bad, we don't know your password either.\n\nmake a new account or something",
+    );
+  };
   return (
     <main>
       <Navbar at="login" />
@@ -21,13 +22,15 @@ export default function login() {
             </label>
             <input
               type="text"
+              placeholder="Enter your email address"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
             />
             <label className="font-semibold text-sm text-gray-600 pb-1 block">
               Password
             </label>
             <input
-              type="text"
+              type="password"
+              placeholder="Enter your password"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
             />
             <button
@@ -54,9 +57,10 @@ export default function login() {
           <div className="py-5">
             <div className="grid grid-cols-2 gap-1">
               <div className="text-center sm:text-left whitespace-nowrap">
-                <button 
+                <button
                   onClick={forgot}
-                  className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
+                  className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

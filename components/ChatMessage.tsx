@@ -8,12 +8,10 @@ const ChatMessage = (props: any) => {
           <span className="text-sm font-semibold text-gray-900 dark:text-white">
             {props.name}
           </span>
-          
         </div>
         <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
           {props.message}
         </p>
-        
       </div>
       <button
         id="dropdownMenuIconButton"
@@ -32,9 +30,8 @@ const ChatMessage = (props: any) => {
           <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
         </svg>
       </button>
-    
     </div>
   );
-}
+};
 
 export default ChatMessage;

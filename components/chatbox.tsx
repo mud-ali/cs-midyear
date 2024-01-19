@@ -16,7 +16,7 @@ const Chatbox = () => {
     setNewChat("");
   };
 
-  const handleKeyPress = (e: {key:string}) => {
+  const handleKeyPress = (e: { key: string }) => {
     if (e.key === "Enter") {
       send();
     }
