@@ -1,0 +1,2 @@
+SELECT topic
+FROM topic
