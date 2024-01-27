@@ -17,7 +17,7 @@ export default function login() {
       <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
         <h1 className="font-bold text-center text-2xl mb-5">Login</h1>
         <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
-          <div className="px-5 py-7">
+          <form action="/api/signin" method="post" className="px-5 py-7">
             <label className="font-semibold text-sm text-gray-600 pb-1 block" htmlFor="username">
               E-mail 
             </label>
@@ -56,7 +56,7 @@ export default function login() {
                 />
               </svg>
             </button>
-          </div>
+          </form>
           <div className="py-5">
             <div className="grid grid-cols-2 gap-1">
               <div className="text-center sm:text-left whitespace-nowrap">
