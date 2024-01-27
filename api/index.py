@@ -1,4 +1,5 @@
 from flask import Flask, request, redirect, url_for, session
+from flask_session import Session
 import sqlite3
 import json
 
@@ -6,6 +7,12 @@ from db_utils.db_init import create_tables
 from insert_utils.db_insert import insert_topic_details, insert_opinion_details
 
 app = Flask(__name__)
+
+
+app.secret_key = "incredibly_very_secret_key_rblijreq2wienewr"
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 db = sqlite3.connect('db/debate.db')
 create_tables(db)
