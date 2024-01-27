@@ -2,18 +2,15 @@ import sqlite3
 
 
 def create_tables(db):
-    # consider reading these from the files just for separation
     create_queries = [
         """CREATE TABLE IF NOT EXISTS user (
                 user_id INTEGER PRIMARY KEY,
+                username VARCHAR,
                 user_first_name VARCHAR,
                 user_last_name VARCHAR,
                 password VARCHAR,
                 points INTEGER,
-                level VARCHAR,
-                dob DATE,
-                region VARCHAR,
-                timezone VARCHAR
+                dob DATE
             )
         """,
         """CREATE TABLE IF NOT EXISTS topic(
