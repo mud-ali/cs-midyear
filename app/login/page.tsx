@@ -1,14 +1,51 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
 export default function login() {
+
   const forgot = () => {
     window.alert(
       "too bad, we don't know your password either.\n\nmake a new account or something",
     );
+  };
+
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSignIn = async (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('/api/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(formData),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        window.location.href = responseData.redirect;
+        console.log("user logged in")
+      } else {
+        console.error('Error during log in process:', response.statusText);
+      }
+    } catch (error: any) {
+      console.error('Error during login process:', error.message);
+    }
   };
   return (
     <main>
@@ -17,12 +54,13 @@ export default function login() {
       <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
         <h1 className="font-bold text-center text-2xl mb-5">Login</h1>
         <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
-          <form action="/api/signin" method="post" className="px-5 py-7">
+          <form className="px-5 py-7">
             <label className="font-semibold text-sm text-gray-600 pb-1 block" htmlFor="username">
               E-mail 
             </label>
             <input
               type="text"
+              onChange={handleInputChange}
               placeholder="Enter your email address or username"
               id="username"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
@@ -32,12 +70,14 @@ export default function login() {
             </label>
             <input
               type="password"
+              onChange={handleInputChange}
               placeholder="Enter your password"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
               id="password"
             />
             <button
               type="button"
+              onClick={handleSignIn}
               className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
             >
               <span className="inline-block mr-2">Login</span>

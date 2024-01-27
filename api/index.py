@@ -58,8 +58,10 @@ def sign_in():
             password = request.form['password']
             if verify_user(db, username, password):
                 session['username'] = username
+            else:
+                return "401 - Unauthorized", 401
         except Exception as e:
-            return "422 - Unprocessable Entity"
+            return "422 - Unprocessable Entity", 422
     return json.dumps({"redirect": "/"})
 
 @app.route("/api/signup", methods=["POST","GET"])
