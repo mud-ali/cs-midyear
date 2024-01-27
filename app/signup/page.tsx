@@ -1,10 +1,50 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
 export default function signup() {
+
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    first_name: '',
+    last_name: '',
+    dob: '',
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSignup = async (e : React.MouseEvent) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(formData),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        window.location.href = responseData.redirect;
+        console.log("new user signed up")
+      } else {
+        console.error('Error during signup:', response.statusText);
+      }
+    } catch (error : any) {
+      console.error('Error during signup:', error.message);
+    }
+  };
+
   return (
     <main>
       <Navbar at="login"/>
@@ -12,12 +52,13 @@ export default function signup() {
       <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
         <h1 className="font-bold text-center text-2xl mb-5">Sign Up</h1>
         <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
-          <div className="py-7 px-5">
+          <form className="py-7 px-5">
             <label className="font-semibold text-sm text-gray-600 pb-1 block" htmlFor="first_name">
               First Name
             </label>
             <input
               type="text"
+              onChange={handleInputChange}
               id="first_name"
               placeholder="First Name"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
@@ -28,6 +69,7 @@ export default function signup() {
             <input
               type="text"
               id="last_name"
+              onChange={handleInputChange}
               placeholder="Enter your password"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
             />
@@ -37,6 +79,7 @@ export default function signup() {
             <input
               type="text"
               id="username"
+              onChange={handleInputChange}
               placeholder="Enter your email address"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
             />
@@ -46,6 +89,7 @@ export default function signup() {
             <input
               type="password"
               id="password"
+              onChange={handleInputChange}
               placeholder="Enter your password"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
             />
@@ -56,11 +100,13 @@ export default function signup() {
             <input
               type="date"
               id="dob"
+              onChange={handleInputChange}
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
             />
 
             <button
               type="button"
+              onClick={handleSignup}
               className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
             >
               <span className="inline-block mr-2">Sign Up</span>
@@ -79,7 +125,7 @@ export default function signup() {
                 />
               </svg>
             </button>
-          </div>
+          </form>
           <div className="py-5">
             <div className="grid grid-cols-2 gap-1">
               <div className="text-center sm:text-left whitespace-nowrap">

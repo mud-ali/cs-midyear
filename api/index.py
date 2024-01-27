@@ -50,7 +50,7 @@ def store_opinion():
     
     return redirect(url_for('/'))
 
-@app.route("/signin", methods=["POST"])
+@app.route("/api/signin", methods=["POST", "GET"])
 def sign_in():
     if request.method == "POST":
         try:
@@ -60,9 +60,9 @@ def sign_in():
                 session['username'] = username
         except Exception as e:
             return "422 - Unprocessable Entity"
-    return redirect(url_for('/'))
+    return json.dumps({"redirect": "/"})
 
-@app.route("/signup", methods=["POST"])
+@app.route("/api/signup", methods=["POST","GET"])
 def sign_up():
     if request.method == "POST":
         try:
@@ -76,7 +76,7 @@ def sign_up():
             session['username'] = username
         except Exception as e:
             return "422 - Unprocessable Entity"
-    return redirect(url_for('/'))
+    return json.dumps({"redirect": "/"})
 
 @app.route("/api/join", methods=["GET", "POST"])
 def join_debate():
