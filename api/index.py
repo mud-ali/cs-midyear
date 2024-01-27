@@ -5,6 +5,8 @@ import json
 
 from db_utils.db_init import create_tables
 from insert_utils.db_insert import insert_topic_details, insert_opinion_details
+from auth_utils.signin import verify_user
+from auth_utils.signup import add_user
 
 app = Flask(__name__)
 
@@ -50,8 +52,31 @@ def store_opinion():
 
 @app.route("/signin", methods=["POST"])
 def sign_in():
-    # todo check stuff
-    return redirect(url_for("/"))
+    if request.method == "POST":
+        try:
+            username = request.form['username']
+            password = request.form['password']
+            if verify_user(db, username, password):
+                session['username'] = username
+        except Exception as e:
+            return "422 - Unprocessable Entity"
+    return redirect(url_for('/'))
+
+@app.route("/signup", methods=["POST"])
+def sign_up():
+    if request.method == "POST":
+        try:
+            username = request.form['username']
+            password = request.form['password']
+            first_name = request.form['first_name']
+            last_name = request.form['last_name']
+            # todo format date properly
+            dob = request.form['dob']
+            add_user(db, username, first_name, last_name, password, dob)
+            session['username'] = username
+        except Exception as e:
+            return "422 - Unprocessable Entity"
+    return redirect(url_for('/'))
 
 @app.route("/api/join", methods=["GET", "POST"])
 def join_debate():
