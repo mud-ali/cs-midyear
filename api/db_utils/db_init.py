@@ -3,6 +3,18 @@ import sqlite3
 
 def create_tables(db):
     create_queries = [
+        """
+        DROP TABLE IF EXISTS user
+        """,
+        """
+        DROP TABLE IF EXISTS topic
+        """,
+        """
+        DROP TABLE IF EXISTS opinions
+        """,
+        """
+        DROP TABLE IF EXISTS debate_private
+        """,
         """CREATE TABLE IF NOT EXISTS user (
                 user_id INTEGER PRIMARY KEY,
                 username VARCHAR,
