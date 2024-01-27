@@ -18,21 +18,23 @@ export default function login() {
         <h1 className="font-bold text-center text-2xl mb-5">Login</h1>
         <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
           <div className="px-5 py-7">
-            <label className="font-semibold text-sm text-gray-600 pb-1 block">
-              E-mail
+            <label className="font-semibold text-sm text-gray-600 pb-1 block" htmlFor="username">
+              E-mail 
             </label>
             <input
               type="text"
-              placeholder="Enter your email address"
+              placeholder="Enter your email address or username"
+              id="username"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
             />
-            <label className="font-semibold text-sm text-gray-600 pb-1 block">
+            <label className="font-semibold text-sm text-gray-600 pb-1 block" htmlFor="password">
               Password
             </label>
             <input
               type="password"
               placeholder="Enter your password"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
+              id="password"
             />
             <button
               type="button"
