@@ -21,4 +21,4 @@ The frontend is written in NextJS, a [web development framework](https://nextjs.
 
 On the backend, we use a Flask server, which is mapped to the frontend using the NextJS API handler. On the dev server, this is done using two separate ports, while the production server uses Vercel Serverless functions. The Flask Session library is used to manage preservation of authentication state, which is required for matching users. The server uses SQLite 3 for a single file database, with API routes for different utility queries. 
 
-Further technical details, as well as setup instructions for a development environment, can be found in (CONTRIBUTING.md)[CONTRIBUTING.md]
+Further technical details, as well as setup instructions for a development environment, can be found in [CONTRIBUTING.md](CONTRIBUTING.md)
