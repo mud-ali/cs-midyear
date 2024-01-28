@@ -59,7 +59,7 @@ export default function signup() {
             <input
               type="text"
               onChange={handleInputChange}
-              id="first_name"
+              name="first_name"
               placeholder="First Name"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
             />
@@ -68,7 +68,7 @@ export default function signup() {
             </label>
             <input
               type="text"
-              id="last_name"
+              name="last_name"
               onChange={handleInputChange}
               placeholder="Enter your password"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
@@ -78,7 +78,7 @@ export default function signup() {
             </label>
             <input
               type="text"
-              id="username"
+              name="username"
               onChange={handleInputChange}
               placeholder="Enter your email address"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
@@ -88,7 +88,7 @@ export default function signup() {
             </label>
             <input
               type="password"
-              id="password"
+              name="password"
               onChange={handleInputChange}
               placeholder="Enter your password"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
@@ -99,7 +99,7 @@ export default function signup() {
             </label>
             <input
               type="date"
-              id="dob"
+              name="dob"
               onChange={handleInputChange}
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
             />
