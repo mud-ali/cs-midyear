@@ -6,7 +6,7 @@ import json
 from db_utils.db_init import create_tables
 from insert_utils.db_insert import insert_topic_details, insert_opinion_details
 from auth_utils.signin import verify_user
-from auth_utils.signup import add_user
+from auth_utils.signup import add_user, get_uid
 
 app = Flask(__name__)
 
@@ -57,7 +57,7 @@ def sign_in():
             username = request.form['username']
             password = request.form['password']
             if verify_user(db, username, password):
-                session['username'] = username
+                session['uid'] = get_uid(db, username)
             else:
                 return "401 - Unauthorized", 401
         except Exception as e:
@@ -75,7 +75,7 @@ def sign_up():
             # todo format date properly
             dob = request.form['dob']
             add_user(db, username, first_name, last_name, password, dob)
-            session['username'] = username
+            session['uid'] = get_uid(db, username)
         except Exception as e:
             return "422 - Unprocessable Entity"
     return json.dumps({"redirect": "/"})
@@ -88,12 +88,13 @@ def join_debate():
 
 @app.route("/api/isloggedin", methods=["GET", "POST"])
 def is_logged_in():
-    if 'username' in session.keys():
+    print(session)
+    if 'uid' in session.keys():
         return json.dumps({"is_logged_in": True})
     else:
         return json.dumps({"is_logged_in": False})
 
 @app.route("/api/logout", methods=["GET", "POST"])
 def logout():
-    session.pop('username', None)
+    session.pop('uid', None)
     return json.dumps({"redirect": "/"})
