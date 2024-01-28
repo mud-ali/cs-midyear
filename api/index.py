@@ -7,6 +7,8 @@ from db_utils.db_init import create_tables
 from insert_utils.db_insert import insert_topic_details, insert_opinion_details
 from auth_utils.signin import verify_user
 from auth_utils.signup import add_user, get_uid
+from debate_utils.debate_utils import match_debaters
+from insert_utils import create_debate
 
 app = Flask(__name__)
 
@@ -82,9 +84,21 @@ def sign_up():
 
 @app.route("/api/join", methods=["GET", "POST"])
 def join_debate():
-    # TODO  match people
-    print("hello")
-    return redirect("http://127.0.0.1:3000/debate/", code=302)
+    user_id = "XXXXX"
+    topic_name = request.form['topic']
+    db_cursor = db.cursor()
+    db_cursor.execute (
+        ''' SELECT topic_id from topic where topic_name = ? ''', (topic_name)
+    )
+    topics_info1 = db_cursor.fetchall()
+    topic_id = topics_info1[0][0]
+    
+    matching_message, topic, user_id1, user_id2, comp_found  = match_debaters(db, user_id, topic_id)
+    if comp_found:
+        create_debate(db, user_id1, user_id2, topic_id)
+        return redirect("http://127.0.0.1:3000/debate/", code=302)
+    else:
+        return matching_message
 
 @app.route("/api/isloggedin", methods=["GET", "POST"])
 def is_logged_in():

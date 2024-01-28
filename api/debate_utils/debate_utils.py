@@ -24,7 +24,7 @@ def match_debaters(db, user_id, topic_id):
     competitor_found = False
     if len(topics_and_opinions_for_possible_competitor) == 0:
         db.commit()
-        return "Competitor not found for this topic", competitor_found
+        return "Competitor not found for this topic", "", "", "", competitor_found
     num_of_checks = 0
     while (not competitor_found and num_of_checks <= len(topics_and_opinions_for_possible_competitor)):
         num_of_checks+=1
@@ -41,4 +41,4 @@ def match_debaters(db, user_id, topic_id):
             db.commit()
             return "Competitor Found!", topic_id, user_id, user_competitor, competitor_found
     db.commit()
-    return "Competitor not found for this topic", competitor_found
+    return "Competitor not found for this topic", "", "", "", competitor_found
