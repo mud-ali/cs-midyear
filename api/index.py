@@ -85,3 +85,15 @@ def join_debate():
     # TODO  match people
     print("hello")
     return redirect("http://127.0.0.1:3000/debate/", code=302)
+
+@app.route("/api/isloggedin", methods=["GET", "POST"])
+def is_logged_in():
+    if 'username' in session.keys():
+        return json.dumps({"is_logged_in": True})
+    else:
+        return json.dumps({"is_logged_in": False})
+
+@app.route("/api/logout", methods=["GET", "POST"])
+def logout():
+    session.pop('username', None)
+    return json.dumps({"redirect": "/"})
