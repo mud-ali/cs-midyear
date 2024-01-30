@@ -11,7 +11,7 @@ export default function create_topic(props) {
       <br />
       <form
         className={`m-auto w-1/2 leading-7 flex flex-col justify-around`}
-        action="/submit_topic"
+        action="/api/submit_topic"
         method="POST"
       >
         <h1 className={`text-4xl text-center`}> Create a Topic! </h1>

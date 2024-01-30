@@ -21,7 +21,7 @@ Session(app)
 db = sqlite3.connect('db/debate.db')
 create_tables(db)
 
-@app.route("/submit_topic", methods=["GET","POST"])
+@app.route("/api/submit_topic", methods=["GET","POST"])
 def submit_topic():
     if request.method == "POST":
         topic_name = request.form['topic_name']
@@ -38,7 +38,7 @@ def submit_topic():
         return redirect(url_for('/'), code=200)
 
 
-@app.route("/store_opinion", methods = ["GET", "POST"])
+@app.route("/api/store_opinion", methods = ["GET", "POST"])
 def store_opinion():
     # make sure to add names of opinion form fields in jsx same as these or change them if not
     if request.method == "POST":
@@ -84,7 +84,7 @@ def sign_up():
 
 @app.route("/api/join", methods=["GET", "POST"])
 def join_debate():
-    user_id = "XXXXX"
+    user_id = session["uid"]
     topic_name = request.form['topic']
     db_cursor = db.cursor()
     db_cursor.execute (
@@ -113,7 +113,7 @@ def logout():
     session.pop('uid', None)
     return json.dumps({"redirect": "/"})
 
-@app.route("/get_topic_questions", methods=["GET", "POST"])
+@app.route("/api/get_topic_questions", methods=["GET", "POST"])
 def get_topic_questions():
     topic_name = request.form['topic']
     db_cursor = db.cursor()

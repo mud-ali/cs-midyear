@@ -14,7 +14,7 @@ export default function submit_opinions() {
       <br />
       <form
         className={`m-auto w-1/2 leading-7 flex flex-col justify-around`}
-        action="/store_opinions"
+        action="/api/store_opinions"
         method="POST"
       >
         <h1 className={`text-4xl text-center`}> Submit Opinions for a Topic! </h1>
