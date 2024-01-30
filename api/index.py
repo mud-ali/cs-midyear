@@ -92,7 +92,7 @@ def join_debate():
     )
     topics_info1 = db_cursor.fetchall()
     topic_id = topics_info1[0][0]
-    return topic_id
+    # return topic_id
     matching_message, topic, user_id1, user_id2, comp_found  = match_debaters(db, user_id, topic_id)
     if comp_found:
         create_debate(db, user_id1, user_id2, topic_id)
