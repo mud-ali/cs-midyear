@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, url_for, session, jsonify
-from flask import Session
+from flask_session import Session
 import sqlite3
 import json
 
