@@ -76,10 +76,10 @@ def sign_up():
             last_name = request.form['last_name']
             # todo format date properly
             dob = request.form['dob']
-            add_user(db, username, first_name, last_name, password, dob)
+            add_user(username, first_name, last_name, password, dob)
             session['uid'] = get_uid(db, username)
         except Exception as e:
-            return "422 - Unprocessable Entity"
+            return "422 - Unprocessable Entity"+str(e)
     return json.dumps({"redirect": "/"})
 
 @app.route("/api/join", methods=["GET", "POST"])
@@ -92,7 +92,7 @@ def join_debate():
     )
     topics_info1 = db_cursor.fetchall()
     topic_id = topics_info1[0][0]
-    
+    return topic_id
     matching_message, topic, user_id1, user_id2, comp_found  = match_debaters(db, user_id, topic_id)
     if comp_found:
         create_debate(db, user_id1, user_id2, topic_id)
