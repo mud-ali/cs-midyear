@@ -77,9 +77,9 @@ def sign_up():
             # todo format date properly
             dob = request.form['dob']
             add_user(username, first_name, last_name, password, dob)
-            session['uid'] = get_uid(db, username)
+            session['uid'] = get_uid(username)
         except Exception as e:
-            return "422 - Unprocessable Entity"+str(e)
+            return "422 - Unprocessable Entity: "+str(e)
     return json.dumps({"redirect": "/"})
 
 @app.route("/api/join", methods=["GET", "POST"])
