@@ -84,7 +84,7 @@ def sign_up():
 
 @app.route("/api/join", methods=["GET", "POST"])
 def join_debate():
-    user_id = session["uid"]
+    user_id = session["uid"] if "uid" in session.keys() else 0
     topic_name = request.form['topic']
     db_cursor = db.cursor()
     db_cursor.execute (
