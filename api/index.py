@@ -8,7 +8,7 @@ from insert_utils.db_insert import insert_topic_details, insert_opinion_details
 from auth_utils.signin import verify_user
 from auth_utils.signup import add_user, get_uid
 from debate_utils.debate_utils import match_debaters
-from insert_utils import create_debate
+from insert_utils.db_insert import create_debate
 
 app = Flask(__name__)
 
