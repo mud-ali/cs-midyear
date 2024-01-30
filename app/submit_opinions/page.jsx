@@ -39,14 +39,6 @@ export default function submit_opinions() {
           >
           Submit
           </button>
-
-          <button
-          id = "submit-for-submitting opinions"
-          type="submit"
-          className="bg-blue-500 rounded-full w-2/5 mx-auto mb-9"
-          >
-          Submit
-          </button>
         </div>
       </form>
     </main>
