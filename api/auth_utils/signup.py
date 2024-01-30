@@ -1,7 +1,8 @@
 import sqlite3
 import hashlib
 
-def add_user(db : sqlite3.Connection, user_uname, user_first_name, user_last_name, password, dob):
+def add_user(user_uname, user_first_name, user_last_name, password, dob):
+    db = sqlite3.connect('db/debate.db')
     db.cursor().execute(
         """
         INSERT INTO user (
@@ -16,7 +17,8 @@ def add_user(db : sqlite3.Connection, user_uname, user_first_name, user_last_nam
     db.commit()
     return get_uid(db, user_uname)
 
-def get_uid(db : sqlite3.Connection, username):
+def get_uid(username):
+    db = sqlite3.connect('db/debate.db')
     return db.cursor().execute(
         """
         SELECT uid FROM user WHERE username = ?
