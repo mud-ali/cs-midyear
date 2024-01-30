@@ -44,7 +44,7 @@ export default function login() {
         console.error('Error during log in process:', response.statusText);
       }
     } catch (error: any) {
-      console.error('Error during login process:', error.message);
+      console.error('some Error during login process:', error.message);
     }
   };
   return (
