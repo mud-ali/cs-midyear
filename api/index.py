@@ -27,15 +27,15 @@ def submit_topic():
         topic_name = request.form['topic_name']
         topic_desc = request.form['topic_desc']
         q1 = request.form['q1']
-        a1 = request.form['a1']
+        a1 = request.form['a1'].replace("\n","[|]")
         q2 = request.form['q2']
-        a2 = request.form['a2']
+        a2 = request.form['a2'].replace("\n","[|]")
         q3 = request.form['q3']
-        a3 = request.form['a3']
+        a3 = request.form['a3'].replace("\n","[|]")
 
-        insert_topic_details(db, topic_name, topic_desc, q1, a1, q2, a2, q3, a3)
+        insert_topic_details(topic_name, topic_desc, q1, a1, q2, a2, q3, a3)
 
-        return redirect(url_for('/'), code=200)
+        return json.dumps({'redirect':'/create_topic'})
 
 
 @app.route("/api/store_opinion", methods = ["GET", "POST"])
