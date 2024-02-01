@@ -74,7 +74,7 @@ export default function create_topic(props) {
             htmlFor="q2"
             className="w-2/5 mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            Question 1:
+            Question 2:
           </label>
           <label
             htmlFor="a2"
@@ -100,7 +100,7 @@ export default function create_topic(props) {
             htmlFor="q3"
             className="w-2/5 mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            Question 1:
+            Question 3:
           </label>
           <label
             htmlFor="a3"
