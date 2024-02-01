@@ -1,18 +1,59 @@
 "use client";
 
-import React from "react";
+import React, {useState} from "react";
 import Navbar from "../../components/Navbar";
 import styles from "@/styles/createTopic.module.css";
 
-export default function create_topic(props) {
+export default function create_topic() {
+
+  const [formData, setFormData] = useState({
+    topic_name: '',
+    topic_desc: '',
+    q1: '',
+    a1: '',
+    q2: '',
+    a2: '',
+    q3: '',
+    a3: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSend = async (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('/api/submit_topic', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(formData),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        window.location.href = responseData.redirect;
+        console.log("topic submitted")
+      } else {
+        console.error('Error during topic submission process: ', response.statusText);
+      }
+    } catch (error: any) {
+      console.error('error sending topic. please check your network: ', error.message);
+    }
+  };
+
   return (
     <main>
       <Navbar at="topic-create" />
       <br />
       <form
         className={`m-auto w-1/2 leading-7 flex flex-col justify-around`}
-        action="/api/submit_topic"
-        method="POST"
       >
         <h1 className={`text-4xl text-center`}> Create a Topic! </h1>
         <div className={styles.topq}>
@@ -25,6 +66,7 @@ export default function create_topic(props) {
           <input
             type="text"
             id="topic_name"
+            onChange={handleInputChange}
             placeholder="Enter topic name here!"
             className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           ></input>
@@ -40,6 +82,7 @@ export default function create_topic(props) {
             type="text"
             id="topic_desc"
             placeholder="Please describe your topic!"
+            onChange={handleInputChange}
             className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           ></input>
         </div>
@@ -57,14 +100,14 @@ export default function create_topic(props) {
             Option choices:
           </label>
           <textarea
-            type="text"
             id="q1"
+            onChange={handleInputChange}
             className="resize-none h-32 block w-2/5 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="What's the question?"
           />
           <textarea
-            type="text"
             id="a1"
+            onChange={handleInputChange}
             className="resize-none h-32 block w-2/5 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Enter the option choices"
           />
@@ -83,14 +126,14 @@ export default function create_topic(props) {
             Option choices:
           </label>
           <textarea
-            type="text"
             id="q2"
+            onChange={handleInputChange}
             className="resize-none h-32 block w-2/5 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="What's the question?"
           />
           <textarea
-            type="text"
             id="a2"
+            onChange={handleInputChange}
             className="resize-none h-32 block w-2/5 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Enter the option choices"
           />
@@ -109,21 +152,21 @@ export default function create_topic(props) {
             Option choices:
           </label>
           <textarea
-            type="text"
             id="q3"
+            onChange={handleInputChange}
             className="resize-none h-32 block w-2/5 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="What's the question?"
           />
           <textarea
-            type="text"
             id="a3"
+            onChange={handleInputChange}
             className="resize-none h-32 block w-2/5 p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Enter the option choices"
           />
         </div>
 
         <button
-          type="submit"
+          onClick={handleSend}
           className="bg-blue-500 rounded-full w-2/5 mx-auto mb-9"
         >
           Submit
