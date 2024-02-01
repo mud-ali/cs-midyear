@@ -1,13 +1,12 @@
 "use client";
 
 import React from "react";
-import  {useState} from "react";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Chatbox from "@/components/chatbox";
 import styles from "@/styles/createTopic.module.css"; // just use same styles as create topic
 
 export default function submit_opinions() {
-  
   return (
     <main>
       <Navbar at="find-debate" />
@@ -17,7 +16,10 @@ export default function submit_opinions() {
         action="/api/store_opinions"
         method="POST"
       >
-        <h1 className={`text-4xl text-center`}> Submit Opinions for a Topic! </h1>
+        <h1 className={`text-4xl text-center`}>
+          {" "}
+          Submit Opinions for a Topic!{" "}
+        </h1>
         <div className={styles.topq}>
           <label
             htmlFor="topic"
@@ -33,11 +35,11 @@ export default function submit_opinions() {
           ></input>
 
           <button
-          id = "submit-for-topic-to-get-questions"
-          type="submit"
-          className="bg-blue-500 rounded-full w-2/5 mx-auto mb-9"
+            id="submit-for-topic-to-get-questions"
+            type="submit"
+            className="bg-blue-500 rounded-full w-2/5 mx-auto mb-9"
           >
-          Submit
+            Submit
           </button>
         </div>
       </form>

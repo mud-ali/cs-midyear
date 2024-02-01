@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
 export default function login() {
-
   const forgot = () => {
     window.alert(
       "too bad, we don't know your password either.\n\nmake a new account or something",
@@ -13,8 +12,8 @@ export default function login() {
   };
 
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,10 +27,10 @@ export default function login() {
     e.preventDefault();
 
     try {
-      const response = await fetch('/api/signin', {
-        method: 'POST',
+      const response = await fetch("/api/signin", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams(formData),
       });
@@ -39,12 +38,12 @@ export default function login() {
       if (response.ok) {
         const responseData = await response.json();
         window.location.href = responseData.redirect;
-        console.log("user logged in")
+        console.log("user logged in");
       } else {
-        console.error('Error during log in process:', response.statusText);
+        console.error("Error during log in process:", response.statusText);
       }
     } catch (error: any) {
-      console.error('some Error during login process:', error.message);
+      console.error("some Error during login process:", error.message);
     }
   };
   return (
@@ -55,8 +54,11 @@ export default function login() {
         <h1 className="font-bold text-center text-2xl mb-5">Login</h1>
         <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
           <form className="px-5 py-7">
-            <label className="font-semibold text-sm text-gray-600 pb-1 block" htmlFor="username">
-              E-mail 
+            <label
+              className="font-semibold text-sm text-gray-600 pb-1 block"
+              htmlFor="username"
+            >
+              E-mail
             </label>
             <input
               type="text"
@@ -65,7 +67,10 @@ export default function login() {
               id="username"
               className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full text-gray-600"
             />
-            <label className="font-semibold text-sm text-gray-600 pb-1 block" htmlFor="password">
+            <label
+              className="font-semibold text-sm text-gray-600 pb-1 block"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -123,7 +128,11 @@ export default function login() {
               </div>
               <div className="text-center sm:text-right  whitespace-nowrap">
                 <button className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" className="w-4 h-4 inline-block align-text-bottom">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 512"
+                    className="w-4 h-4 inline-block align-text-bottom"
+                  >
                     <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                   </svg>
                   <Link href="/signup/">

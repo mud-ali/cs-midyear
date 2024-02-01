@@ -1,23 +1,26 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import styles from "@/styles/createTopic.module.css";
 
 export default function create_topic() {
-
   const [formData, setFormData] = useState({
-    topic_name: '',
-    topic_desc: '',
-    q1: '',
-    a1: '',
-    q2: '',
-    a2: '',
-    q3: '',
-    a3: ''
+    topic_name: "",
+    topic_desc: "",
+    q1: "",
+    a1: "",
+    q2: "",
+    a2: "",
+    q3: "",
+    a3: "",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e:
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLInputElement>,
+  ) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
@@ -28,10 +31,10 @@ export default function create_topic() {
     e.preventDefault();
 
     try {
-      const response = await fetch('/api/submit_topic', {
-        method: 'POST',
+      const response = await fetch("/api/submit_topic", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams(formData),
       });
@@ -39,12 +42,18 @@ export default function create_topic() {
       if (response.ok) {
         const responseData = await response.json();
         window.location.href = responseData.redirect;
-        console.log("topic submitted")
+        console.log("topic submitted");
       } else {
-        console.error('Error during topic submission process: ', response.statusText);
+        console.error(
+          "Error during topic submission process: ",
+          response.statusText,
+        );
       }
     } catch (error: any) {
-      console.error('error sending topic. please check your network: ', error.message);
+      console.error(
+        "error sending topic. please check your network: ",
+        error.message,
+      );
     }
   };
 
@@ -52,9 +61,7 @@ export default function create_topic() {
     <main>
       <Navbar at="topic-create" />
       <br />
-      <form
-        className={`m-auto w-1/2 leading-7 flex flex-col justify-around`}
-      >
+      <form className={`m-auto w-1/2 leading-7 flex flex-col justify-around`}>
         <h1 className={`text-4xl text-center`}> Create a Topic! </h1>
         <div className={styles.topq}>
           <label
