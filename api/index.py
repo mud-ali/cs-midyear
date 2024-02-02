@@ -7,7 +7,7 @@ from db_utils.db_init import create_tables
 from insert_utils.db_insert import insert_topic_details, insert_opinion_details
 from auth_utils.signin import verify_user
 from auth_utils.signup import add_user, get_uid
-from debate_utils.debate_utils import calculate_match_debate as match_debaters
+from debate_utils.debate_utils import calculate_match_debate
 from insert_utils.db_insert import create_debate
 from topic_utils.topic import get_topic_by_name
 from flask_socketio import SocketIO
@@ -55,13 +55,19 @@ def store_opinion():
 
 @app.route('/api/process_input', methods=['POST'])
 def process_input():
-    data = request.get_json(force=True)
-    user1_id = data.get('user1_id')
-    user2_id = data.get('user2_id')
+    try:
+        if request.method == "POST":
+            user1_id = int(request.form['user1_id'])
+            user2_id = int(request.form['user2_id'])
+        else:
+            return {'error': 'Invalid request method'}, 400
 
-    match_percent = match_debaters(user1_id, user2_id)
-    result = "678"
-    return {'result': result}
+        # Now you can use user1_id and user2_id as needed
+        match_topic = calculate_match_debate(user1_id, user2_id)
+        # match_topic = "678"
+        return {'result': match_topic}
+    except ValueError as e:
+        return {'error': 'Invalid input data. Ensure user1_id and user2_id are integers.'}, 400
 
 @app.route("/api/signin", methods=["POST", "GET"])
 def sign_in():

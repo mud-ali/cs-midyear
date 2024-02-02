@@ -15,17 +15,15 @@ export default function Join() {
     e.preventDefault();
 
     try {
+      const formData = new FormData();
+      formData.append('user1_id', user1Id);
+      formData.append('user2_id', user2Id);
+  
       const response = await fetch('/api/process_input', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user1_id: user1Id,
-          user2_id: user2Id,
-        }),
+        body: formData,
       });
-
+  
       const data = await response.json();
       setResult(data.result);
     } catch (error) {
