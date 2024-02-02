@@ -9,6 +9,7 @@ from auth_utils.signin import verify_user
 from auth_utils.signup import add_user, get_uid
 from debate_utils.debate_utils import match_debaters
 from insert_utils.db_insert import create_debate
+from topic_utils.topic import get_topic_by_name
 
 app = Flask(__name__)
 
@@ -20,6 +21,7 @@ Session(app)
 
 db = sqlite3.connect('db/debate.db')
 create_tables(db)
+db.close()
 
 @app.route("/api/submit_topic", methods=["GET","POST"])
 def submit_topic():
@@ -42,7 +44,7 @@ def submit_topic():
 def store_opinion():
     # make sure to add names of opinion form fields in jsx same as these or change them if not
     if request.method == "POST":
-        user_id = "XXXXX" # how do we get this?
+        user_id = session["uid"] if "uid" in session.keys() else 0
         topic_name = request.form['topic'] # for Search Topics Page, should be dropdown of topics for user to choose, maybe even use searchbar
         opinion1 = request.form['opinion1']
         opinion2 = request.form['opinion2']
@@ -112,27 +114,20 @@ def logout():
     session.pop('uid', None)
     return json.dumps({"redirect": "/"})
 
-@app.route("/api/get_topic_questions", methods=["GET", "POST"])
+@app.route("/api/get_topic_questions", methods=["POST", "GET"])
 def get_topic_questions():
-    topic_name = request.form['topic']
-    db_cursor = db.cursor()
-    db_cursor.execute (
-        ''' SELECT topic_id from topic where topic_name = ? ''', (topic_name)
-    )
-    topics_info1 = db_cursor.fetchall()
-    topic_id = topics_info1[0][0]
-
-    db_cursor.execute(
-        '''SELECT q1, q2, q3, q1_options, q2_options, q3_options FROM topic WHERE topic_id = ?''', 
-        (topic_id)
-    )
-    topics_info2 = db.cursor.fetchall()
-    q1, q2, q3, q1_options, q2_options, q3_options = topics_info2[0][0]
-    return jsonify({
-            'q1': q1,
-            'q2': q2,
-            'q3': q3,
-            'q1_options': q1_options,
-            'q2_options': q2_options,
-            'q3_options': q3_options
-    })
+    if request.method == "POST":
+        
+        topic_name = request.form['topic']
+        
+        try:
+            stuff = get_topic_by_name(topic_name) 
+            return stuff
+        except Exception as e:
+            return {
+                "q1": ["What is your opinion on the topic?", ["Yes", "No", "Maybe"]],
+                "q2": ["What is your opinion on the topic?", ["Yes", "No", "Maybe"]],
+                "q3": ["What is your opinion on the topic?", ["Yes", "No", "Maybe"]]
+            }
+    
+    return "405 - Method Not Allowed", 405
