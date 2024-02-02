@@ -125,9 +125,9 @@ def get_topic_questions():
             return stuff
         except Exception as e:
             return {
-                "q1": ["What is your opinion on the topic?", ["Yes", "No", "Maybe"]],
-                "q2": ["What is your opinion on the topic?", ["Yes", "No", "Maybe"]],
-                "q3": ["What is your opinion on the topic?", ["Yes", "No", "Maybe"]]
+                "q1": ["What is your opinion on the topic? "+str(e), ["Yes", "No", "Maybe"]],
+                "q2": ["What is your opniion on the topic?", ["Yes", "No", "Maybe"]],
+                "q3": ["What is your oinion on the topic?", ["Yes", "No", "Maybe"]]
             }
     
     return "405 - Method Not Allowed", 405
