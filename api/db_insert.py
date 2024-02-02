@@ -9,3 +9,4 @@ def insert_topic_details(topic_name, topic_desc, q1, a1, q2, a2, q3, a3):
         (topic_name, topic_desc, q1, a1, q2, a2, q3, a3)
     )
     db.commit()
+    db.close()

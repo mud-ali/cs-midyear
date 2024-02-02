@@ -1,7 +1,14 @@
 import sqlite3
 
-def create_tables(db):
+def create_tables():
     # consider reading these from the files just for separation
+    db_master = sqlite3.connect('db/debate.db')
+    db = db_master.cursor()
+    db.execute("DROP TABLE IF EXISTS  debate_private;")
+    db.execute("DROP TABLE IF EXISTS  opinions;")
+    db.execute("DROP TABLE IF EXISTS  topic;")
+    db.execute("DROP TABLE IF EXISTS  user;")
+    db_master.commit()
     create_queries = [
         """CREATE TABLE IF NOT EXISTS user (
                 user_id INTEGER PRIMARY KEY,
@@ -41,4 +48,7 @@ def create_tables(db):
 
     for create_query in create_queries:
         db.execute(create_query)
-    db.commit()
+    
+    db_master.commit()
+    db.close()
+    db_master.close()

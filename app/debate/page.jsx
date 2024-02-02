@@ -8,6 +8,8 @@ export default function Join() {
   const [result, setResult] = useState('');
   const [user1Id, setUser1Id] = useState(0);
   const [user2Id, setUser2Id] = useState(0);
+  const [user1Messages, setUser1Messages] = useState([]);
+  const [user2Messages, setUser2Messages] = useState([]);
   const [user1Message, setUser1Message] = useState('');
   const [user2Message, setUser2Message] = useState('');
 
@@ -33,11 +35,13 @@ export default function Join() {
 
   const handleUser1Submit = (e) => {
     e.preventDefault();
+    setUser1Messages((prevMessages) => [...prevMessages, `-->: ${user1Message}`]);
     setUser1Message('');
   };
 
   const handleUser2Submit = (e) => {
     e.preventDefault();
+    setUser2Messages((prevMessages) => [...prevMessages, `-->: ${user2Message}`]);
     setUser2Message('');
   };
 
@@ -74,14 +78,14 @@ export default function Join() {
             />
           </div>
           <button type="submit" className="mt-4 bg-blue-500 text-white p-2 rounded">
-            Process Input
+            Find a Debate Topic!
           </button>
         </form>
 
         {/* Display Result in Sidebar */}
         {result && (
           <div className="mt-4">
-            <h2 className="text-lg font-bold mb-2">Result</h2>
+            <h2 className="text-lg font-bold mb-2">Topic Found!</h2>
             <p>{result}</p>
           </div>
         )}
@@ -91,9 +95,11 @@ export default function Join() {
       <div className="flex-1 flex p-4">
         {/* User 1 Chat Box */}
         <div className="flex-1 p-4 border rounded bg-yellow-100">
-          <h2 className="text-lg font-bold mb-2">User 1 ID</h2>
+          <h2 className="text-lg font-bold mb-2">User 1</h2>
           <div>
-            <p>{user1Message}</p>
+            {user1Messages.map((message, index) => (
+              <p key={index}>{message}</p>
+            ))}
           </div>
           <form onSubmit={handleUser1Submit}>
             <input
@@ -108,9 +114,11 @@ export default function Join() {
 
         {/* User 2 Chat Box */}
         <div className="flex-1 p-4 ml-4 border rounded bg-green-100">
-          <h2 className="text-lg font-bold mb-2">User 2 ID</h2>
+          <h2 className="text-lg font-bold mb-2">User 2</h2>
           <div>
-            <p>{user2Message}</p>
+            {user2Messages.map((message, index) => (
+              <p key={index}>{message}</p>
+            ))}
           </div>
           <form onSubmit={handleUser2Submit}>
             <input
