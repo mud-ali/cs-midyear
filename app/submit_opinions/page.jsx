@@ -12,35 +12,9 @@ import styles from "@/styles/createTopic.module.css"; // just use same styles as
 // the json is the questions
 // ok, in the meantime I have a few more moderator tools ill work on
 //lemme take a look give me like 5 minutes alr
-// hold on just push this and then look at it
 
 export default function submit_opinions() {
   const [topicName, setTopicName] = useState("");
-  const [questionsData, setQuestionsData] = useState(null);
-  const [questionsPrinted, setquestionsPrinted] = useState(false);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await fetch("/api/get_topic_questions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ topic: topicName }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error!: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setquestionsPrinted(true)
-      setQuestionsData(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
   return (
     <main>
@@ -48,7 +22,6 @@ export default function submit_opinions() {
       <br />
       <form
         className={`m-auto w-1/2 leading-7 flex flex-col justify-around`}
-        onSubmit={handleSubmit}
       >
         <h1 className={`text-4xl text-center`}>
           {" "}
@@ -80,17 +53,6 @@ export default function submit_opinions() {
           </button>
         </div>
       </form>
-
-      {questionsPrinted ? (
-        <div className="text-white">
-          <h2 className = "text-white">Questions:</h2>
-          <ul>
-            {Object.keys(questionsData).map((key) => (
-              <li key={key}>{questionsData[key]}</li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
     </main>
   );
 }

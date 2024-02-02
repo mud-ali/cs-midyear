@@ -19,7 +19,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 db = sqlite3.connect('db/debate.db')
-create_tables(db)
+create_tables()
 
 @app.route("/api/submit_topic", methods=["GET","POST"])
 def submit_topic():
@@ -48,7 +48,7 @@ def store_opinion():
         opinion2 = request.form['opinion2']
         opinion3 = request.form['opinion3']
 
-        insert_opinion_details(db, user_id, topic_name, opinion1, opinion2, opinion3)
+        insert_opinion_details(user_id, topic_name, opinion1, opinion2, opinion3)
     
     return redirect(url_for('/'))
 
@@ -93,9 +93,9 @@ def join_debate():
     topics_info1 = db_cursor.fetchall()
     topic_id = topics_info1[0][0]
     # return topic_id
-    matching_message, topic, user_id1, user_id2, comp_found  = match_debaters(db, user_id, topic_id)
+    matching_message, topic, user_id1, user_id2, comp_found  = match_debaters(user_id, topic_id)
     if comp_found:
-        create_debate(db, user_id1, user_id2, topic_id)
+        create_debate(user_id1, user_id2, topic_id)
         return redirect("http://127.0.0.1:3000/debate/", code=302)
     else:
         return matching_message
@@ -138,3 +138,4 @@ def get_topic_questions():
             'q2_options': q2_options,
             'q3_options': q3_options
     })
+    
