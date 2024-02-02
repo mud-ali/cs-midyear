@@ -13,7 +13,6 @@ from topic_utils.topic import get_topic_by_name
 from flask_socketio import SocketIO
 
 app = Flask(__name__)
-
 app.secret_key = "incredibly_very_secret_key_rblijreq2wienewr" #TODO change to ENV var
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -54,6 +53,16 @@ def store_opinion():
     
     return {"redirect": "/"}
 
+@app.route('/api/process_input', methods=['POST'])
+def process_input():
+    data = request.json
+    user1_id = data.get('user1_id')
+    user2_id = data.get('user2_id')
+
+    match_percent = match_debaters(user1_id, user2_id)
+    result = "678"
+    return jsonify({'result': result})
+
 @app.route("/api/signin", methods=["POST", "GET"])
 def sign_in():
     if request.method == "POST":
@@ -84,25 +93,6 @@ def sign_up():
             return "422 - Unprocessable Entity: "+str(e)
     return json.dumps({"redirect": "/"})
 
-@app.route("/api/join", methods=["GET", "POST"])
-def join_debate():
-    user_id = session["uid"] if "uid" in session.keys() else 0
-    topic_name = request.form['topic']
-    db = sqlite3.connect('db/debate.db')
-    db_cursor = db.cursor()
-    db_cursor.execute (
-        ''' SELECT topic_id from topic where topic_name = ? ''', (topic_name)
-    )
-    topics_info1 = db_cursor.fetchall()
-    topic_id = topics_info1[0][0]
-    # return topic_id
-    db.close()
-    matching_message, topic, user_id1, user_id2, comp_found  = match_debaters(user_id, topic_id)
-    if comp_found:
-        create_debate(user_id1, user_id2, topic_id)
-        return redirect("http://127.0.0.1:3000/debate/", code=302)
-    else:
-        return matching_message
 
 @app.route("/api/isloggedin", methods=["GET", "POST"])
 def is_logged_in():
