@@ -49,7 +49,7 @@ def store_opinion():
         except Exception as e:
             return "422 - Unprocessable Entity "+str(e)
     
-    return {"redirect": "/"}
+    return {{"redirect": "/"}}
 
 @app.route('/api/process_input', methods=['POST'])
 def process_input():
