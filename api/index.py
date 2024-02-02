@@ -102,11 +102,10 @@ def join_debate():
 
 @app.route("/api/isloggedin", methods=["GET", "POST"])
 def is_logged_in():
-    print(session)
     if 'uid' in session.keys():
-        return json.dumps({"is_logged_in": True})
+        return json.dumps({"is_logged_in": "true"}), 200
     else:
-        return json.dumps({"is_logged_in": False})
+        return json.dumps({"is_logged_in": "false"}), 200
 
 @app.route("/api/logout", methods=["GET", "POST"])
 def logout():
