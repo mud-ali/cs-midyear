@@ -6,8 +6,8 @@ import styles from "@/styles/debateRoom.module.css";
 
 export default function Join() {
   const [result, setResult] = useState('');
-  const [user1Id, setUser1Id] = useState('');
-  const [user2Id, setUser2Id] = useState('');
+  const [user1Id, setUser1Id] = useState(0);
+  const [user2Id, setUser2Id] = useState(0);
   const [user1Message, setUser1Message] = useState('');
   const [user2Message, setUser2Message] = useState('');
 
