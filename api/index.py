@@ -10,6 +10,7 @@ from auth_utils.signup import add_user, get_uid
 from debate_utils.debate_utils import match_debaters
 from insert_utils.db_insert import create_debate
 from topic_utils.topic import get_topic_by_name
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
 
