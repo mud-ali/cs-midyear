@@ -10,10 +10,8 @@ from auth_utils.signup import add_user, get_uid
 from debate_utils.debate_utils import match_debaters
 from insert_utils.db_insert import create_debate
 from topic_utils.topic import get_topic_by_name
-from flask_socketio import SocketIO
 
 app = Flask(__name__)
-
 
 app.secret_key = "incredibly_very_secret_key_rblijreq2wienewr" #TODO change to ENV var
 app.config["SESSION_PERMANENT"] = False
@@ -87,6 +85,7 @@ def sign_up():
 def join_debate():
     user_id = session["uid"] if "uid" in session.keys() else 0
     topic_name = request.form['topic']
+    db = sqlite3.connect('db/debate.db')
     db_cursor = db.cursor()
     db_cursor.execute (
         ''' SELECT topic_id from topic where topic_name = ? ''', (topic_name)
@@ -94,6 +93,7 @@ def join_debate():
     topics_info1 = db_cursor.fetchall()
     topic_id = topics_info1[0][0]
     # return topic_id
+    db.close()
     matching_message, topic, user_id1, user_id2, comp_found  = match_debaters(user_id, topic_id)
     if comp_found:
         create_debate(user_id1, user_id2, topic_id)
