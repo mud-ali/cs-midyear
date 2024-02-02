@@ -42,15 +42,17 @@ def submit_topic():
 def store_opinion():
     # make sure to add names of opinion form fields in jsx same as these or change them if not
     if request.method == "POST":
-        user_id = session["uid"] if "uid" in session.keys() else 0
-        topic_name = request.form['topic'] # for Search Topics Page, should be dropdown of topics for user to choose, maybe even use searchbar
-        opinion1 = request.form['opinion1']
-        opinion2 = request.form['opinion2']
-        opinion3 = request.form['opinion3']
-
-        insert_opinion_details(user_id, topic_name, opinion1, opinion2, opinion3)
+        try:
+            user_id = session["uid"] if "uid" in session.keys() else 0
+            topic_name = request.form['topic'] # for Search Topics Page, should be dropdown of topics for user to choose, maybe even use searchbar
+            opinion1 = request.form['q1-a']
+            opinion2 = request.form['q2-a']
+            opinion3 = request.form['q3-a']
+            insert_opinion_details(user_id, topic_name, opinion1, opinion2, opinion3)
+        except Exception as e:
+            return "422 - Unprocessable Entity "+str(e)
     
-    return redirect(url_for('/'))
+    return {"redirect": "/"}
 
 @app.route("/api/signin", methods=["POST", "GET"])
 def sign_in():

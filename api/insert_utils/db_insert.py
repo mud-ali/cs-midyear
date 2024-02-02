@@ -16,14 +16,16 @@ def insert_opinion_details(user_id, topic_name, opinion1, opinion2, opinion3):
     db = sqlite3.connect('db/debate.db')
     db_cursor = db.cursor()
     db_cursor.execute(
-        '''SELECT topic_id FROM topic WHERE topic_name = ?''', 
-        (topic_name)
+        "SELECT topic_id FROM topic WHERE topic_name = ?", 
+        (topic_name,)
     )
-    topic_id = db_cursor.fetchone()
+    topic_id = db_cursor.fetchone()[0]
+    # assert opinion1[0] == "red", user_id 
+    
     db_cursor.execute(
-        """ INSERT INTO opinion 
+        """ INSERT INTO opinions 
         (user_id, topic_id, opinion1, opinion2, opinion3) VALUES (?, ?, ?, ?, ?)""", 
-        (user_id, topic_id, opinion1, opinion2, opinion3)
+        (user_id[0], topic_id, opinion1, opinion2, opinion3)
     )
     db.commit()
     db.close()

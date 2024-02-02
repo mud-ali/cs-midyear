@@ -10,6 +10,13 @@ export default function submit_opinions() {
     topic: "",
   });
 
+  const [opinion, setOpinion] = useState({
+    "q1-a": "",
+    "q2-a": "",
+    "q3-a": "",
+    "topic": ""
+  });
+
   const [questions, setQuestions] = useState([] as [string, string[]][]);
 
   const handleInputChange = (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -17,6 +24,14 @@ export default function submit_opinions() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleOpinionChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+    setOpinion({
+      ...opinion,
+      [e.target.name]: e.target.value,
+    });
+    console.log(opinion);
   };
 
   const search = async (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -31,10 +46,16 @@ export default function submit_opinions() {
           },
           body: new URLSearchParams(formData),
         });
-    
+     
         if (response.ok) {
           const responseData = await response.json() as { q1: [string, string[]], q2: [string, string[]], q3: [string, string[]] };
           setQuestions([responseData.q1, responseData.q2, responseData.q3]);
+          setOpinion({
+            "q1-a": "",
+            "q2-a": "",
+            "q3-a": "",
+            "topic": formData.topic
+          });
           console.log("search happened");
         } else {
           console.error("Error during searcing process:", response.statusText);
@@ -53,11 +74,12 @@ export default function submit_opinions() {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: new URLSearchParams(formData),
+        body: new URLSearchParams(opinion),
       });
 
       if (response.ok) {
         console.log("user opinion saved");
+        console.log(response);
       } else {
         console.error("Error during saving process:", response.statusText);
       }
@@ -110,23 +132,26 @@ export default function submit_opinions() {
                       </span>&nbsp;&nbsp;
                       {question[0]}
                     </label>
-                    {  
-                      Array.from(Array(question[1].length).keys()).map((i) => {
-                        return (
-                          <div key={i}>
-                            <input
-                              type="radio"
-                              name={`q${index + 1}-a`}
-                              value={question[1][i]}
-                              className="mr-2"
-                              ></input>
-                            <label htmlFor={`q${index + 1}-a`}>
-                              {question[1][i]}
-                            </label>
-                          </div>
-                        );
-                      })
-                    }
+                    <fieldset>
+                      {  
+                        Array.from(Array(question[1].length).keys()).map((i) => {
+                          return (
+                            <div key={i}>
+                              <input
+                                type="radio"
+                                name={`q${index + 1}-a`}
+                                value={question[1][i]}
+                                className="mr-2"
+                                onChange={handleOpinionChange}
+                                ></input>
+                              <label htmlFor={`q${index + 1}-a`}>
+                                {question[1][i]}
+                              </label>
+                            </div>
+                          );
+                        })
+                      }
+                    </fieldset>
                     
                   </div>
                 );
