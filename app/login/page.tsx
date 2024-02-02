@@ -40,6 +40,7 @@ export default function login() {
         window.location.href = responseData.redirect;
         console.log("user logged in");
       } else {
+        alert("incorrect username or password")
         console.error("Error during log in process:", response.statusText);
       }
     } catch (error: any) {
