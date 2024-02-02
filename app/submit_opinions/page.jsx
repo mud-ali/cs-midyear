@@ -7,17 +7,27 @@ import Chatbox from "@/components/chatbox";
 import styles from "@/styles/createTopic.module.css"; // just use same styles as create topic
 
 export default function submit_opinions() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> d540806b5db4b006294fe705eef3e8c6d8dd652d
   return (
     <main>
       <Navbar at="find-debate" />
       <br />
       <form
         className={`m-auto w-1/2 leading-7 flex flex-col justify-around`}
-        action="/store_opinions"
+        action="/api/store_opinions"
         method="POST"
       >
+<<<<<<< HEAD
         <h1 className={`text-4xl text-center mb-4`} > Submit Opinions for a Topic! </h1>
+=======
+        <h1 className={`text-4xl text-center`}>
+          {" "}
+          Submit Opinions for a Topic!{" "}
+        </h1>
+>>>>>>> d540806b5db4b006294fe705eef3e8c6d8dd652d
         <div className={styles.topq}>
           <label
             htmlFor="topic"
@@ -48,11 +58,20 @@ export default function submit_opinions() {
           </div>
 
           <button
+<<<<<<< HEAD
           type="submit"
           className="mx-auto bg-blue-500 rounded-full w-2/5 mb-9"
         >
           Submit
         </button>
+=======
+            id="submit-for-topic-to-get-questions"
+            type="submit"
+            className="bg-blue-500 rounded-full w-2/5 mx-auto mb-9"
+          >
+            Submit
+          </button>
+>>>>>>> d540806b5db4b006294fe705eef3e8c6d8dd652d
         </div>
       </form>
     </main >

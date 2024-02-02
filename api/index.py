@@ -21,24 +21,24 @@ Session(app)
 db = sqlite3.connect('db/debate.db')
 create_tables(db)
 
-@app.route("/submit_topic", methods=["GET","POST"])
+@app.route("/api/submit_topic", methods=["GET","POST"])
 def submit_topic():
     if request.method == "POST":
         topic_name = request.form['topic_name']
         topic_desc = request.form['topic_desc']
         q1 = request.form['q1']
-        a1 = request.form['a1']
+        a1 = request.form['a1'].replace("\n","[|]")
         q2 = request.form['q2']
-        a2 = request.form['a2']
+        a2 = request.form['a2'].replace("\n","[|]")
         q3 = request.form['q3']
-        a3 = request.form['a3']
+        a3 = request.form['a3'].replace("\n","[|]")
 
-        insert_topic_details(db, topic_name, topic_desc, q1, a1, q2, a2, q3, a3)
+        insert_topic_details(topic_name, topic_desc, q1, a1, q2, a2, q3, a3)
 
-        return redirect(url_for('/'), code=200)
+        return json.dumps({'redirect':'/create_topic'})
 
 
-@app.route("/store_opinion", methods = ["GET", "POST"])
+@app.route("/api/store_opinion", methods = ["GET", "POST"])
 def store_opinion():
     # make sure to add names of opinion form fields in jsx same as these or change them if not
     if request.method == "POST":
@@ -58,12 +58,12 @@ def sign_in():
         try:
             username = request.form['username']
             password = request.form['password']
-            if verify_user(db, username, password):
-                session['uid'] = get_uid(db, username)
+            if verify_user(username, password) != "no user found":
+                session['uid'] = get_uid(username)
             else:
                 return "401 - Unauthorized", 401
         except Exception as e:
-            return "422 - Unprocessable Entity", 422
+            return "422 - Unprocessable Entity "+str(e)
     return json.dumps({"redirect": "/"})
 
 @app.route("/api/signup", methods=["POST","GET"])
@@ -76,15 +76,15 @@ def sign_up():
             last_name = request.form['last_name']
             # todo format date properly
             dob = request.form['dob']
-            add_user(db, username, first_name, last_name, password, dob)
-            session['uid'] = get_uid(db, username)
+            add_user(username, first_name, last_name, password, dob)
+            session['uid'] = get_uid(username)
         except Exception as e:
-            return "422 - Unprocessable Entity"
+            return "422 - Unprocessable Entity: "+str(e)
     return json.dumps({"redirect": "/"})
 
 @app.route("/api/join", methods=["GET", "POST"])
 def join_debate():
-    user_id = "XXXXX"
+    user_id = session["uid"] if "uid" in session.keys() else 0
     topic_name = request.form['topic']
     db_cursor = db.cursor()
     db_cursor.execute (
@@ -92,7 +92,7 @@ def join_debate():
     )
     topics_info1 = db_cursor.fetchall()
     topic_id = topics_info1[0][0]
-    
+    # return topic_id
     matching_message, topic, user_id1, user_id2, comp_found  = match_debaters(db, user_id, topic_id)
     if comp_found:
         create_debate(db, user_id1, user_id2, topic_id)
@@ -113,7 +113,7 @@ def logout():
     session.pop('uid', None)
     return json.dumps({"redirect": "/"})
 
-@app.route("/get_topic_questions", methods=["GET", "POST"])
+@app.route("/api/get_topic_questions", methods=["GET", "POST"])
 def get_topic_questions():
     topic_name = request.form['topic']
     db_cursor = db.cursor()
