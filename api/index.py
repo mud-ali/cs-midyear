@@ -55,7 +55,7 @@ def store_opinion():
 
 @app.route('/api/process_input', methods=['POST'])
 def process_input():
-    data = request.json
+    data = request.json()
     user1_id = data.get('user1_id')
     user2_id = data.get('user2_id')
 

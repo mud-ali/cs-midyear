@@ -15,7 +15,7 @@ export default function Join() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3000/api/process_input', {
+      const response = await fetch('/api/process_input', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
