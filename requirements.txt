@@ -3,5 +3,5 @@ werkzeug==2.2.2
 flask==2.2.2
 Flask-Session==0.5.0
 flask-socketio==5.3.6
-alt-profanity-check # dont think requirements needed for these
-scikit-learn
+# alt-profanity-check # dont think requirements needed for these
+# scikit-learn
