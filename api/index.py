@@ -115,17 +115,18 @@ def logout():
 
 @app.route("/api/get_topic_questions", methods=["GET", "POST"])
 def get_topic_questions():
-    topic_name = request.form['topic']
+    topic_name = request.json['topic']
+    print(topic_name)
     db_cursor = db.cursor()
-    db_cursor.execute (
-        ''' SELECT topic_id from topic where topic_name = ? ''', (topic_name)
-    )
-    topics_info1 = db_cursor.fetchall()
-    topic_id = topics_info1[0][0]
+    # db_cursor.execute (
+    #     ''' SELECT topic_id from topic where topic_name = ? ''', (topic_name)
+    # )
+    # topics_info1 = db_cursor.fetchall()
+    # topic_id = topics_info1[0][0]
 
     db_cursor.execute(
-        '''SELECT q1, q2, q3, q1_options, q2_options, q3_options FROM topic WHERE topic_id = ?''', 
-        (topic_id)
+        '''SELECT q1, q2, q3, q1_options, q2_options, q3_options FROM topic WHERE topic_name = ?''', 
+        (topic_name)
     )
     topics_info2 = db.cursor.fetchall()
     q1, q2, q3, q1_options, q2_options, q3_options = topics_info2[0][0]
