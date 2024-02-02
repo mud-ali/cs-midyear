@@ -20,9 +20,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-db = sqlite3.connect('db/debate.db')
-create_tables(db)
-db.close()
+create_tables()
 
 @app.route("/api/submit_topic", methods=["GET","POST"])
 def submit_topic():

@@ -67,3 +67,4 @@ def create_tables():
     for create_query in create_queries:
         db.execute(create_query)
     db.commit()
+    db.close()
