@@ -6,6 +6,14 @@ import Navbar from "@/components/Navbar";
 import Chatbox from "@/components/chatbox";
 import styles from "@/styles/createTopic.module.css"; // just use same styles as create topic
 
+// so basically we need to get the topic question details based on the user input
+// so if you go to db, i just created Dogs for test, when the user types dogs into it, it should go to the flask method
+// and take the json that it returned and print each element in the json
+// the json is the questions
+// ok, in the meantime I have a few more moderator tools ill work on
+//lemme take a look give me like 5 minutes alr
+// hold on just push this and then look at it
+
 export default function submit_opinions() {
   const [topicName, setTopicName] = useState("");
   const [questionsData, setQuestionsData] = useState(null);
@@ -13,7 +21,6 @@ export default function submit_opinions() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const response = await fetch("/api/get_topic_questions", {
         method: "POST",
