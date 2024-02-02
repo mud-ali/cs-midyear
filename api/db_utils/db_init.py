@@ -1,7 +1,8 @@
 import sqlite3
 
 
-def create_tables(db):
+def create_tables():
+    db = sqlite3.connect('db/debate.db')
     create_queries = [
         # """
         # DROP TABLE IF EXISTS user

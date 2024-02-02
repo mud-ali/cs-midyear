@@ -1,7 +1,8 @@
 import sqlite3
 import random
 
-def match_debaters(db, user_id, topic_id):
+def match_debaters(user_id, topic_id):
+    db = sqlite3.connect('db/debate.db')
     db_cursor = db.cursor()
     # depends if user wants to select topic they wish to debate about
     db_cursor.execute(
